@@ -90,7 +90,7 @@ app.route('/list')
       // log/send error if ture
       if (err) res.status(500).send('Connection error');
       var resultsArray = [];
-      var query = client.query('DELETE FROM list WHERE name=($1)', [data.name]);
+      var query = client.query('UPDATE list set name=($1), status=($2) WHERE name=($1)', [data.name, data.status]);
 
       query.on('row', function (row) {
         resultsArray.push(row);
@@ -99,6 +99,32 @@ app.route('/list')
       query.on('end', function () {
         done();
         return res.status(200).send({ status: 'Put success' });
+      }); // end on end
+    }); // end pg connect
+  }) // end put update task
+
+//////////////////////////////// DELETE //////////////////////////////////////////////
+  .delete(function (req, res) {
+
+    // Body Data
+    var data = req.body;
+
+    console.log('Data Recieved:', data);
+
+    pg.connect(connectionString, function (err, client, done) {
+
+      // log/send error if ture
+      if (err) res.status(500).send('Connection error');
+      var resultsArray = [];
+      var query = client.query('DELETE FROM list WHERE name=($1)', [data.name]);
+
+      query.on('row', function (row) {
+        resultsArray.push(row);
+      }); // end on row
+
+      query.on('end', function () {
+        done();
+        return res.status(200).send({ status: 'Delete success' });
       }); // end on end
     }); // end pg connect
   }); // end put delete task
