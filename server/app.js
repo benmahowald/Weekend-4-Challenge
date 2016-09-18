@@ -61,7 +61,8 @@ app.route('/list')
       if (err) res.status(500).send('Connection error');
 
       // query database to add/post/insert a tast in the list table
-      var query = client.query('INSERT INTO "list" ("name", "status") VALUES ($1, false);' [data.name, data.status]);
+      console.log(data.name);
+      var query = client.query('INSERT INTO list (name) VALUES ($1)', [data.name]);
 
       // push each row of DB TABLE list into resultsArray
       query.on('row', function (row) {
@@ -89,7 +90,7 @@ app.route('/list')
       // log/send error if ture
       if (err) res.status(500).send('Connection error');
       var resultsArray = [];
-      var query = client.query('DELETE FROM list WHERE id=($1)', [data.id]);
+      var query = client.query('DELETE FROM list WHERE name=($1)', [data.name]);
 
       query.on('row', function (row) {
         resultsArray.push(row);
@@ -97,7 +98,7 @@ app.route('/list')
 
       query.on('end', function () {
         done();
-        return res.status(200).send({ status: 'Working' });
+        return res.status(200).send({ status: 'Put success' });
       }); // end on end
     }); // end pg connect
   }); // end put delete task
