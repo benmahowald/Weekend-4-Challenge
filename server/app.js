@@ -29,13 +29,13 @@ app.route('/list')
 
 /////////////////////////////// GET ///////////////////////////////////////
   .get(function (req, res) {
-    console.log('/list get response', req.body);
+    console.log('/list get response');
     pg.connect(connectionString, function (err, client, done) {
         if (err) res.status(500).send('Connection error');
 
         var resultsArray = [];
 
-        var query = client.query('SELECT * FROM list ORDER BY id ASC');
+        var query = client.query('SELECT * FROM list ORDER BY status ASC');
         query.on('row', function (row) {
           resultsArray.push(row);
         });
@@ -57,7 +57,6 @@ app.route('/list')
     pg.connect(connectionString, function (err, client, done) {
 
       // check for connection error
-
       if (err) res.status(500).send('Connection error');
 
       // query database to add/post/insert a tast in the list table
@@ -79,7 +78,7 @@ app.route('/list')
 
   //////////////////////////////// PUT //////////////////////////////////////////////
   .put(function (req, res) {
-
+    console.log('in put route');
     // Body Data
     var data = req.body;
 
@@ -89,11 +88,10 @@ app.route('/list')
 
       // log/send error if ture
       if (err) res.status(500).send('Connection error');
-      var resultsArray = [];
-      var query = client.query('UPDATE list set name=($1), status=($2) WHERE name=($1)', [data.name, data.status]);
+      // query database to update status
+      var query = client.query('UPDATE list set status=($1) WHERE name=($2)', [data.status, data.name]);
 
       query.on('row', function (row) {
-        resultsArray.push(row);
       }); // end on row
 
       query.on('end', function () {
@@ -105,7 +103,7 @@ app.route('/list')
 
 //////////////////////////////// DELETE //////////////////////////////////////////////
   .delete(function (req, res) {
-
+    console.log('in delete');
     // Body Data
     var data = req.body;
 
@@ -113,14 +111,11 @@ app.route('/list')
 
     pg.connect(connectionString, function (err, client, done) {
 
-      // log/send error if ture
+      // log/send error
       if (err) res.status(500).send('Connection error');
-      var resultsArray = [];
-      var query = client.query('DELETE FROM list WHERE name=($1)', [data.name]);
 
-      query.on('row', function (row) {
-        resultsArray.push(row);
-      }); // end on row
+      // query DB with delete statement
+      var query = client.query('DELETE FROM list WHERE name=($1)', [data.name]);
 
       query.on('end', function () {
         done();

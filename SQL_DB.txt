@@ -1,0 +1,10 @@
+CREATE TABLE list (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(80),
+	status BOOLEAN DEFAULT false
+);
+
+INSERT INTO list (name) VALUES ('Finish Weekend 4 project');
+INSERT INTO list (name) VALUES ('Practice music for wedding');
+INSERT INTO list (name) VALUES ('Attend Autumn Brew Review');
+INSERT INTO list (name) VALUES ('Cheer on Vikings as fairweather fan');
