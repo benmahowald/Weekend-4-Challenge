@@ -1,38 +1,54 @@
 html, body {
-font-family: arial, sans-serif;
+font-family: 'Open Sans Condensed', sans-serif;
 font-weight: lighter;
 text-align: center;
-color: #444;
+color: #f7a239;
+background-color: #268b86;
+}
+body {
+  margin: 40px 0px;
 }
 /*div container for each task*/
 .tasks {
   margin: 15px auto;
   padding: 3px 10px;
-  background-color: #daffbd;
-  color: #3d3d3d
-  border: 1px solid #305723;
-  border-radius: 7px;
+  background-color: #056762;
+  color: #95c8c7;
+  border: 1px solid none;
+  border-radius: 3px;
   width: 60%;
   text-align: left;
+  vertical-align: middle;
 }
 h1 {
-  font-family: arial;
+  font-family: 'Open Sans Condensed', sans-serif;
   text-align: center;
   font-size: 110%;
+  letter-spacing: 1px;
+  margin: auto 30px;
 }
 p {
   display: inline;
+  margin-right: 190px;
+  letter-spacing: .7px;
 }
 /*input field style*/
 #taskName {
   border-width: 0 0 1px 0;
-  border-color: #333;
+  border-color: #95c8c7;
   width: 60%;
-  font-size: 140%;
+  font-size: 130%;
+  font-weight: lighter;
   text-align: center;
   padding: 10px;
   margin: 10px;
-  color: #444;
+  color: #95c8c7;
+  background-color: transparent;
+  letter-spacing: 1.75px;
+}
+::-webkit-input-placeholder {
+    color:  #95c8c7;
+    opacity: .3;
 }
 #taskName:focus {
   outline: none;
@@ -40,20 +56,26 @@ p {
 /*buttons*/
 .deleteButton, .completeButton, #create {
   background-color: transparent;
-  margin: 5px;
+  margin: 5px 0px;
   padding: 3px;
   display: inline;
-  border-radius: 1px;
+  border-radius: 3px;
   cursor: pointer;
+  display: inline;
+  outline: none;
+  font-weight: lighter;
+  opacity: .8;
+  font-size: 65%;
 }
 #create {
-  border: 1px solid #61b41f;
-  color: #61b41f;
+  border: 1px solid #411238;
+  color: #411238;
   background-color: transparent;
 }
 #create:hover {
-  background-color: #61b41f;
-  color: #fff;
+  background-color: #411238;
+  color: #95c8c7;
+  font-weight: lighter;
 }
 .completeButton {
   border: 1px solid #61b41f;
@@ -61,15 +83,15 @@ p {
 }
 .completeButton:hover {
   border: 1px solid #61b41f;
-  color: #fff;
+  color: #e0dede;
   background-color: #61b41f;
 }
 .deleteButton {
-    border: 1px solid #cf1111;
-    color: #cf1111;
+    border: 1px solid #411238;
+    color: #411238;
+    float: right;
 }
 .deleteButton:hover {
-  border: 1px solid #cf1111;
-  color: #fff;
-  background-color: #cf1111;
+  color: #e0dede;
+  background-color: #411238;
 }

@@ -3,96 +3,124 @@ console.log('js');
 // globals
 
 $(document).ready(function () {
-  // console.log( 'JQ');
-  //////////////////////// AJAX GET LIST ON READY /////////////////////////////
+    // console.log( 'JQ');
+    //////////////////////// AJAX GET LIST ON READY /////////////////////////////
 
-  $.ajax({
-    type: 'GET',
-    url: '/list',
-    success: function (data) {
-      var list = data;
-      console.log('got this back from server:', list);
-      displayTasks(list);
-
-      // displayTasks(task);
-    }, // end success
-  }); // end ajax
-
-  ///////////////////////// ON CLICK     CREATE     /////////////////////////
-  $('#create').on('click', function () {
-    console.log('in create on click');
-
-    // assemble object to send
-    var sendTask = {
-      name: $('#taskName').val(),
-    };
-
-    // ajax call to post route
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       url: '/list',
-      data: sendTask,
       success: function (data) {
-        var task = data;
+        var list = data;
+        console.log('got this back from server:', list);
+        displayTasks(list);
 
-        // nested get call that retrieves the most current version of the list table
-        ajaxGet();
-      }, // end POST success
-    }); // end ajax POST route
-  }); // end create on click
+        // displayTasks(task);
+      }, // end success
+    }); // end ajax
 
-  ///////////////////////// ON CLICK CONFIRM /////////////////////////
+    ///////////////////////// ON CLICK     CREATE     /////////////////////////
+    $('#create').on('click', function () {
+      console.log('in create on click');
 
-  $('body').on('click', '.completeButton', function () {
+      // assemble object to send
+      var sendTask = {
+        name: $('#taskName').val(),
+      };
+
+      // ajax call to post route
+      $.ajax({
+        type: 'POST',
+        url: '/list',
+        data: sendTask,
+        success: function (data) {
+          var task = data;
+
+          // nested get call that retrieves the most current version of the list table
+          ajaxGet();
+        }, // end POST success
+      }); // end ajax POST route
+    }); // end create on click
+
+    ///////////////////////// ON CLICK CONFIRM /////////////////////////
+
+    $('body').on('change', '#checkerson', function () {
+      console.log('in #checkerson click');
+      $(this).parent().css({ 'text-decoration': 'line-through' });
+
+      // assemble object to send
+      var sendTask = {
+        name: $(this).data('name'),
+        status: 'true',
+      };
+
+      // ajax call to post route
+      $.ajax({
+        type: 'PUT',
+        url: '/list',
+        data: sendTask,
+        success: function (data) {
+          var task = data;
+          console.log('confirm status success');
+
+          // nested get call that retrieves the most current version of the list table
+          ajaxGet();
+        }, // end POST success
+      }); // end ajax POST route
+    }); // end create on click
+  });
+
+$('body').on('click', '.completeButton', function () {
     console.log('in confirm on click');
 
-    // assemble object to send
-    var sendTask = {
-      name: $(this).data('name'),
-      status: 'true',
-    };
+    //   $(this).parent().css({ 'text-decoration': 'line-through' });
+    //
+    //   // assemble object to send
+    //   var sendTask = {
+    //     name: $(this).data('name'),
+    //     status: 'true',
+    //   };
+    //
+    //   // ajax call to post route
+    //   $.ajax({
+    //     type: 'PUT',
+    //     url: '/list',
+    //     data: sendTask,
+    //     success: function (data) {
+    //       var task = data;
+    //       console.log('confirm status success');
+    //
+    //       // nested get call that retrieves the most current version of the list table
+    //       ajaxGet();
+    //     }, // end POST success
+    //   }); // end ajax POST route
+    // }); // end create on click
 
-    // ajax call to post route
-    $.ajax({
-      type: 'PUT',
-      url: '/list',
-      data: sendTask,
-      success: function (data) {
-        var task = data;
-        console.log('confirm status success');
+    ///////////////////////// ON CLICK DELETE /////////////////////////
 
-        // nested get call that retrieves the most current version of the list table
-        ajaxGet();
-      }, // end POST success
-    }); // end ajax POST route
-  }); // end create on click
+    $('body').on('click', '.deleteButton', function () {
+      console.log('in delete on click');
 
-  ///////////////////////// ON CLICK DELETE /////////////////////////
+      // assemble object to send
+      var sendTask = {
+        name: $(this).data('name'),
+      };
 
-  $('body').on('click', '.deleteButton', function () {
-    console.log('in delete on click');
+      // ajax call to post route
+      $.ajax({
+        type: 'DELETE',
+        url: '/list',
+        data: sendTask,
+        success: function (data) {
+          var task = data;
+          console.log('delete success');
 
-    // assemble object to send
-    var sendTask = {
-      name: $(this).data('name'),
-    };
+          // nested get call that retrieves the most current version of the list table
+          ajaxGet();
+        }, // end POST success
+      }); // end ajax POST route
+    }); // end create on click
 
-    // ajax call to post route
-    $.ajax({
-      type: 'DELETE',
-      url: '/list',
-      data: sendTask,
-      success: function (data) {
-        var task = data;
-        console.log('delete success');
-
-        // nested get call that retrieves the most current version of the list table
-        ajaxGet();
-      }, // end POST success
-    }); // end ajax POST route
-  }); // end create on click
-
-}); // end doc ready
+  }); // end doc ready
 
 //////////////////////////////// OUTSIDE ON READY /////////////////////////////
 
@@ -115,17 +143,20 @@ var displayTasks = function (list) {
     // div for individual tasks
     var div = $('<div />', { class: 'tasks' });
 
+    // add checkbox
+    var checkBox = '<input id="checkerson" type="checkbox">';
+
     // add the task name
     var taskNameDOM = '<p>' + list[i].name + '</p>';
 
     // add a complete button with data linked to task name
-    var completeMe = '<button class="completeButton" data-name="' + list[i].name + '">complete</button>';
+    // var completeMe = '<button class="completeButton" data-name="' + list[i].name + '">DONE</button>';
 
     // add a delete button with data linked to task name
-    var deleteMe = '<button class="deleteButton" data-name="' + list[i].name + '">delete</button>';
+    var deleteMe = '<button class="deleteButton" data-name="' + list[i].name + '">CLEAR</button>';
 
     // append html elements in individual divs
-    div.append(taskNameDOM).append(completeMe).append(deleteMe);
+    div.append(checkBox).append(taskNameDOM).append(deleteMe);
 
     // nest individual divs inside the larger container
     container.append(div);
