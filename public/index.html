@@ -2,16 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do</title>
     <script src="vendors/jquery-3.0.0.min.js" charset="utf-8"></script>
     <script src="scripts/myScript.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="/styles/style.css" media="screen" title="no title">
+    <link rel="stylesheet" href="/styles/style.min.css" media="screen" title="no title">
   </head>
   <body>
-    <h1>Write it down. Do it up. Check it off.</h1>
-    <input id="taskName" value="" onfocus="this.placeholder = ''"
-    onblur="this.placeholder = 'enter your text'"><br>
-    <button id='create'>CREATE</button>
+    <h1 style="margin-top:35px;">Write it down. Do it up. Check it off.</h1>
+    <input id="taskName" name="taskInput" value=""><br>
     <div id="outputDiv"></div>
   </body>
 </html>

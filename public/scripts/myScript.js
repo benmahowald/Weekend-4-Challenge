@@ -18,6 +18,36 @@ $(document).ready(function () {
       }, // end success
     }); // end ajax
 
+    $('#taskName').keypress(function (e) {
+      console.log('in keypress');
+      var key = e.which;
+      if($('#taskName').val() !== '') {
+
+
+        if(key == 13) {
+          console.log('you hit enter');
+          $('input[name = taskInput]').click();
+          // assemble object to send
+          var sendTask = {
+            name: $('#taskName').val(),
+          };
+          console.log($('#taskName').val());
+          // ajax call to post route
+          $.ajax({
+            type: 'POST',
+            url: '/list',
+            data: sendTask,
+            success: function (data) {
+              var task = data;
+
+              // nested get call that retrieves the most current version of the list table
+              ajaxGet();
+            }, // end POST success
+          }); // end ajax POST route
+        } // end if key 13
+      } // end if
+    });
+
     ///////////////////////// ON CLICK     CREATE     /////////////////////////
     $('#create').on('click', function () {
       console.log('in create on click');

@@ -5,13 +5,13 @@ var bodyParser = require('body-parser');
 
 // var urlencodedParser = bodyParser.urlencoded( { extended: false } );
 var pg = require('pg');
-// if(process.env.DATABASE_URL != undefined) {
-//     connectionString = process.env.DATABASE_URL + "?ssl=true";
-// } else {
-//     // running locally, use our local database instead
-//     connectionString = 'postgres://localhost:5432/local_db_name';
-// }
-var connectionString = process.env.DATABASE_URL + "?ssl=true"|| 'postgres:localhost:5432/to-do-list';
+if(process.env.DATABASE_URL != undefined) {
+    var connectionString = process.env.DATABASE_URL + "?ssl=true";
+} else {
+    // running locally, use our local database instead
+    var connectionString = 'postgres://localhost:5432/to-do-list';
+}
+// var connectionString = process.env.DATABASE_URL + "?ssl=true"|| 'postgres:localhost:5432/to-do-list';
 var port = process.env.PORT || 8080;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
