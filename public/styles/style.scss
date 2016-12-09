@@ -1,7 +1,7 @@
 $background-2: #543616;
 $background-1: #3E240E;
 $lightershade: #9C7030;
-$taskGradient: rgb(175, 144, 36);
+$taskGradient: #a27a23;
 
 html, body {
 top: 0;
@@ -21,11 +21,9 @@ body {
 }
 /*div container for each task*/
 .tasks {
-  margin: auto;
-  padding: 20px;
+  padding: 20px 0 20px 15px;
   color: $background-2;
   border: 1px solid $background-2;
-  width: 100%;
   text-align: left;
   background: $lightershade; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient($lightershade, $taskGradient); /* For Safari 5.1 to 6.0 */
@@ -77,10 +75,19 @@ p {
     border: 1px solid $background-2;
     color: $background-2;
     float: right;
-    margin: -5px 50px auto;
+    margin: -5px 30px auto;
     padding: 8px;
 }
 .deleteButton:hover {
   color: $lightershade;
   background-color: $background-2;
+}
+
+input[type="checkbox"] {
+  margin-right: 7px;
+}
+
+.deleteImg {
+  opacity: .7;
+  width: 20px;
 }

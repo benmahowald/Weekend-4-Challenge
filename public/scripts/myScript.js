@@ -4,6 +4,16 @@ console.log('js is sourced');
 
 $(document).ready(function () {
     // console.log( 'JQ');
+
+    //photo of the day call
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.nasa.gov/planetary/apod?api_key=Kdn0hM9wWP5C7B0XMy3J9nW7nGzb8w0eOURuz4AD',
+      success: function (data) {
+        console.log(data);
+      }
+    })
+
     //////////////////////// AJAX GET LIST ON READY /////////////////////////////
 
     $.ajax({
@@ -185,11 +195,13 @@ var displayTasks = function (list) {
     // add a complete button with data linked to task name
     // var completeMe = '<button class="completeButton" data-name="' + list[i].name + '">DONE</button>';
 
+    var deleteIcon = '<img class="deleteIcon" data-name="' + list[i].name + '" href="assets/delete.png">';
+
     // add a delete button with data linked to task name
     var deleteMe = '<button class="deleteButton" data-name="' + list[i].name + '">CLEAR</button>';
 
     // append html elements in individual divs
-    div.append(checkBox).append(taskNameDOM).append(deleteMe);
+    div.append(checkBox).append(taskNameDOM).append(deleteIcon);
 
     // nest individual divs inside the larger container
     container.append(div);
@@ -197,6 +209,10 @@ var displayTasks = function (list) {
 
   $('#outputDiv').append(container);
 }; // end displayTasks
+
+$('#tasks').on(click, function () {
+  console.log('clicked a task');
+});
 
 // ajax call in a function to make above code easier to read
 var ajaxGet = function () {
@@ -211,4 +227,4 @@ var ajaxGet = function () {
       // displayTasks(task);
     }, // end GET success
   }); // end ajax GET route
-};
+}; // end get function

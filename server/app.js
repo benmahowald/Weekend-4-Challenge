@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var photo = require("nat-geo-api");
 
 // var urlencodedParser = bodyParser.urlencoded( { extended: false } );
 var pg = require('pg');
@@ -12,7 +13,7 @@ if(process.env.DATABASE_URL != undefined) {
     var connectionString = 'postgres://localhost:5432/to-do-list';
 }
 // var connectionString = process.env.DATABASE_URL + "?ssl=true"|| 'postgres:localhost:5432/to-do-list';
-var port = process.env.PORT || 8080;
+var porto = process.env.PORT || 8080;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -20,8 +21,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 // spin up server
-app.listen(port, function () {
-  console.log('spinning on', port);
+app.listen(porto, function () {
+  console.log('spinning on', porto);
 });
 
 /////////////////////////////// BASE URL //////////////////////////////////
@@ -29,6 +30,9 @@ app.get('/', function (req, res) {
   console.log('base URL hit');
   res.sendFile('index.html');
 }); // end base url
+
+// nat-geo call
+photo.run({});
 
 // list route url
 app.route('/list')

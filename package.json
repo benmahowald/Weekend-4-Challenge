@@ -12,6 +12,9 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "install": "^0.8.2",
+    "nat-geo-api": "^1.0.0",
+    "npm": "^4.0.3",
     "pg": "^6.1.0"
   },
   "repository": {
