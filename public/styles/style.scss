@@ -1,55 +1,109 @@
+@font-face {
+  font-family: mainFont;
+  src: url(../assets/Raleway-Regular.ttf);
+}
+
+@font-face {
+  font-family: lighterFont;
+  src: url(../assets/Raleway-Thin.ttf)
+}
+
+@font-face {
+  font-family: clockFont;
+  src: url(../assets/Lato-Bold.ttf)
+}
+
 $background-2: #543616;
 $background-1: #3E240E;
 $lightershade: #9C7030;
 $taskGradient: #a27a23;
+$whiteColor: #ededed;
 
 html, body {
-top: 0;
-margin: auto;
-font-family: arial, sans-serif;
-font-weight: lighter;
-text-align: center;
-color: $lightershade;
-background: $background-1; /* For browsers that do not support gradients */
-background: -webkit-linear-gradient(left, $background-1 , $background-2); /* For Safari 5.1 to 6.0 */
-background: -o-linear-gradient(right, $background-1, $background-2); /* For Opera 11.1 to 12.0 */
-background: -moz-linear-gradient(right, $background-1, $background-2); /* For Firefox 3.6 to 15 */
-background: linear-gradient(to right, $background-1 , $background-2); /* Standard syntax */
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  font-family: lighterFont;
+  text-align: center;
+  color: $whiteColor;
+  // background: $background-1;
+  // background: -webkit-linear-gradient(left, $background-1 , $background-2); /* For Safari 5.1 to 6.0 */
+  // background: -o-linear-gradient(right, $background-1, $background-2); /* For Opera 11.1 to 12.0 */
+  // background: -moz-linear-gradient(right, $background-1, $background-2); /* For Firefox 3.6 to 15 */
+  // background: linear-gradient(to right, $background-1 , $background-2); /* Standard syntax */
 }
+
 body {
-  top-margin: 30px;
+    padding-top: 30px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
+
 /*div container for each task*/
 .tasks {
   padding: 20px 0 20px 15px;
-  color: $background-2;
-  border: 1px solid $background-2;
+  color: $whiteColor;
+  border: 1px solid $whiteColor;
+  width: 400px;
+  max-width: 85%;
+  margin: 4px auto;
   text-align: left;
-  background: $lightershade; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient($lightershade, $taskGradient); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient($lightershade, $taskGradient); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient($lightershade, $taskGradient); /* For Firefox 3.6 to 15 */
-    background: linear-gradient($lightershade, $taskGradient); /* Standard syntax (must be last) */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* For Safari 3.1 to 6.0 */
+   -webkit-transition-property: padding;
+   -webkit-transition-duration: 1.5s;
+
+   -webkit-transition-property: font-size;
+   -webkit-transition-duration: 1.5s;
+
+   -webkit-transition-property: margin;
+   -webkit-transition-duration: 1.5s;
+   -webkit-transition-timing-function: linear;
+   /* Standard syntax */
+   transition-property: padding;
+   -webkit-transition-duration: 1.5s;
+
+   transition-property: font-size;
+   -webkit-transition-duration: 1.5s;
+
+   -webkit-transition-property: margin;
+   transition-duration: 1.5s;
+   transition-timing-function: linear;
 }
+
+.tasks:hover {
+  padding: 25px 5px 25px 20px;
+  font-size: 110%;
+  margin: 5px auto;
+
+}
+
 h1 {
-  font-family: arial;
+  font-family: mainFont;
   text-align: center;
-  font-size: 70%;
+  font-size: 130%;
+  background-color: rgba(0,0,0,0.7);
+  background-blend-mode: darken;
+
+  padding: 10px;
 }
 p {
+  font-family: lighterFont;
   display: inline;
 }
 /*input field style*/
 #taskName {
   border-width: 0 0 1px 0;
-  border-color: $lightershade;
-  width: 60%;
-  font-size: 140%;
+  border-color: $whiteColor;
+  max-width: 90%;
+  font-size: 130%;
   text-align: center;
-  padding: 10px;
-  margin: 10px 10px 30px 10px;
-  color: #89806E;
+  padding: 10px 10px 2px 10px;
+  color: $whiteColor;
+  margin-bottom: 10px;
   background-color: transparent;
+  background-image: url();
 }
 #taskName:focus {
   outline: none;
@@ -87,7 +141,17 @@ input[type="checkbox"] {
   margin-right: 7px;
 }
 
-.deleteImg {
-  opacity: .7;
+.deleteIcon {
+  opacity: .4;
   width: 20px;
+  float: right;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+#clock {
+  font-family: clockFont;
+  font-size: 300%;
+  opacity: 0.9;
+  margin-bottom: 30px;
 }

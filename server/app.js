@@ -31,12 +31,8 @@ app.get('/', function (req, res) {
   res.sendFile('index.html');
 }); // end base url
 
-// nat-geo call
-photo.run({});
-
 // list route url
 app.route('/list')
-
 /////////////////////////////// GET ///////////////////////////////////////
   .get(function (req, res) {
     console.log('/list get response');

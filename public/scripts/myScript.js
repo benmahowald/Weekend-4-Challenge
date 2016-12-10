@@ -1,16 +1,40 @@
-console.log('js is sourced');
+// console.log('js is sourced');
 
-// globals
+function updateClock ( ) {
+  var currentTime = new Date ( );
+  var currentHours = currentTime.getHours ( );
+  var currentMinutes = currentTime.getMinutes ( );
+
+  // Pad the minutes and seconds with leading zeros, if required
+  currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+
+  // Convert the hours component to 12-hour format if needed
+  currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+
+  // Convert an hours component of "0" to "12"
+  currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+
+  // Compose the string for display
+  var currentTimeString = currentHours + ":" + currentMinutes;
+
+  $("#clock").html(currentTimeString);
+};
 
 $(document).ready(function () {
     // console.log( 'JQ');
 
-    //photo of the day call
+    updateClock();
+    
+    setInterval('updateClock()', 10000);
+
+    //img of the day call
     $.ajax({
       type: 'GET',
       url: 'https://api.nasa.gov/planetary/apod?api_key=Kdn0hM9wWP5C7B0XMy3J9nW7nGzb8w0eOURuz4AD',
       success: function (data) {
+        var dailyImg = data.url;
         console.log(data);
+        $('body').css('background-image', 'url("' + dailyImg + '")');
       }
     })
 
@@ -137,13 +161,12 @@ $('body').on('click', '.completeButton', function () {
 
     ///////////////////////// ON CLICK DELETE /////////////////////////
 
-    $('body').on('click', '.deleteButton', function () {
+    $('body').on('click', '.deleteIcon', function () {
       console.log('in delete on click');
+      console.log('taskName:', $(this).data());
 
       // assemble object to send
-      var sendTask = {
-        name: $(this).data('name'),
-      };
+      var sendTask = $(this).data();
 
       // ajax call to post route
       $.ajax({
@@ -151,9 +174,7 @@ $('body').on('click', '.completeButton', function () {
         url: '/list',
         data: sendTask,
         success: function (data) {
-          var task = data;
           console.log('delete success');
-
           // nested get call that retrieves the most current version of the list table
           ajaxGet();
         }, // end POST success
@@ -186,6 +207,7 @@ var displayTasks = function (list) {
     if (list[i].status) {
       var checkBox = '<input id="checkerson" type="checkbox" checked>';
     } // end if statement
+
     // add checkbox
     var checkBox = '<input id="checkerson" type="checkbox">';
 
@@ -195,7 +217,7 @@ var displayTasks = function (list) {
     // add a complete button with data linked to task name
     // var completeMe = '<button class="completeButton" data-name="' + list[i].name + '">DONE</button>';
 
-    var deleteIcon = '<img class="deleteIcon" data-name="' + list[i].name + '" href="assets/delete.png">';
+    var deleteIcon = '<img class="deleteIcon" data-name="' + list[i].name + '" src="assets/delete.png">';
 
     // add a delete button with data linked to task name
     var deleteMe = '<button class="deleteButton" data-name="' + list[i].name + '">CLEAR</button>';
@@ -209,10 +231,6 @@ var displayTasks = function (list) {
 
   $('#outputDiv').append(container);
 }; // end displayTasks
-
-$('#tasks').on(click, function () {
-  console.log('clicked a task');
-});
 
 // ajax call in a function to make above code easier to read
 var ajaxGet = function () {
