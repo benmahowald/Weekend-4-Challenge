@@ -1,5 +1,6 @@
 // console.log('js is sourced');
 
+console.log(window.pageYOffset);
 function updateClock ( ) {
   var currentTime = new Date ( );
   var currentHours = currentTime.getHours ( );
@@ -24,7 +25,7 @@ $(document).ready(function () {
     // console.log( 'JQ');
 
     updateClock();
-    
+
     setInterval('updateClock()', 10000);
 
     //img of the day call
