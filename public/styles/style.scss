@@ -50,33 +50,13 @@ body {
   margin: 4px auto;
   text-align: left;
   background-color: rgba(0, 0, 0, 0.6);
-  /* For Safari 3.1 to 6.0 */
-   -webkit-transition-property: padding;
-   -webkit-transition-duration: 1.5s;
-
-   -webkit-transition-property: font-size;
-   -webkit-transition-duration: 1.5s;
-
-   -webkit-transition-property: margin;
-   -webkit-transition-duration: 1.5s;
-   -webkit-transition-timing-function: linear;
-   /* Standard syntax */
-   transition-property: padding;
-   -webkit-transition-duration: 1.5s;
-
-   transition-property: font-size;
-   -webkit-transition-duration: 1.5s;
-
-   -webkit-transition-property: margin;
-   transition-duration: 1.5s;
-   transition-timing-function: linear;
+  transition: padding 4s;
+  transition-timing-function: linear;
 }
 
 .tasks:hover {
-  padding: 25px 5px 25px 20px;
-  font-size: 110%;
-  margin: 5px auto;
-
+  // padding: 25px 5px 25px 20px;
+  // font-size: 110%;
 }
 
 h1 {
@@ -160,6 +140,8 @@ input[type="checkbox"] {
 
 .wrapper {
   position: relative;
+  width: 100%;
+  display: none;
 }
 input#toggle {
   max-height: 0;
