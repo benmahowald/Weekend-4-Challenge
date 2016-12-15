@@ -217,8 +217,8 @@ var displayTasks = function (list) {
 
     // add a complete button with data linked to task name
     // var completeMe = '<button class="completeButton" data-name="' + list[i].name + '">DONE</button>';
-
-    var deleteIcon = '<img class="deleteIcon" data-name="' + list[i].name + '" src="assets/delete.png">';
+// <i class="fa fa-times-circle" style="font-size:150% float:right" aria-hidden="true"></i>
+    var deleteIcon = '<i class="fa fa-times-circle deleteIcon" data-name="' + list[i].name + '" aria-hidden="true""></i>';
 
     // add a delete button with data linked to task name
     var deleteMe = '<button class="deleteButton" data-name="' + list[i].name + '">CLEAR</button>';

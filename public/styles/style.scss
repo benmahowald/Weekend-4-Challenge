@@ -19,6 +19,10 @@ $lightershade: #9C7030;
 $taskGradient: #a27a23;
 $whiteColor: #ededed;
 
+html {
+  background-color: #000;
+}
+
 html, body {
   width: 100%;
   height: 100%;
@@ -38,6 +42,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    background-size: 100% 100%;
 }
 
 /*div container for each task*/
@@ -122,8 +127,6 @@ input[type="checkbox"] {
 }
 
 .deleteIcon {
-  opacity: .4;
-  width: 20px;
   float: right;
   margin-right: 25px;
   cursor: pointer;
