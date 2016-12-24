@@ -21,8 +21,15 @@ function updateClock ( ) {
   $("#clock").html(currentTimeString);
 };
 
+
+
 $(document).ready(function () {
     // console.log( 'JQ');
+
+    document.querySelector( "#nav-toggle" )
+      .addEventListener( "click", function() {
+        this.classList.toggle( "active" );
+      });
 
     updateClock();
 
