@@ -19,7 +19,7 @@ $lightershade: #9C7030;
 $taskGradient: #a27a23;
 $whiteColor: #ededed;
 
-#nav-toggle { position: absolute; left: 50%; top: 50%; }
+#nav-toggle { position: absolute; margin: auto; z-index: 50; }
 
 #nav-toggle { cursor: pointer; padding: 10px 35px 16px 0px; }
 #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
@@ -169,8 +169,9 @@ input[type="checkbox"] {
 }
 
 #clock {
+  margin-top: 30%;
   font-family: clockFont;
-  font-size: 300%;
+  font-size: 700%;
   opacity: 0.9;
   margin-bottom: 30px;
 }
