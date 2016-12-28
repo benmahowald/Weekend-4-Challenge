@@ -114,32 +114,37 @@ $(document).ready(function () {
     }); // end create on click
 
     ///////////////////////// ON CLICK CONFIRM /////////////////////////
+    var checked = true;
 
-  //   $('body').on('change', '#checkerson', function () {
-  //     console.log('in #checkerson click');
-  //     $(this).parent().css({ 'text-decoration': 'line-through' });
-  //
-  //     // assemble object to send
-  //     var sendTask = {
-  //       name: $(this).data('name'),
-  //       status: 'true',
-  //     };
-  //
-  //     // ajax call to post route
-  //     $.ajax({
-  //       type: 'PUT',
-  //       url: '/list',
-  //       data: sendTask,
-  //       success: function (data) {
-  //         var task = data;
-  //         console.log('confirm status success');
-  //
-  //         // nested get call that retrieves the most current version of the list table
-  //         ajaxGet();
-  //       }, // end POST success
-  //     }); // end ajax POST route
-  //   }); // end create on click
-  // });
+    $('body').on('change', '#checkerson', function () {
+      if(checked) {
+        $(this).parent().css({ 'text-decoration': 'line-through' });
+        checked = false;
+      }else{
+        $(this).parent().css({ 'text-decoration': 'none' });
+        checked = true;
+      }
+
+      // assemble object to send
+      // var sendTask = {
+    //     name: $(this).data('name'),
+    //     status: !checked,
+    //   };
+    //
+    //   // ajax call to post route
+    //   $.ajax({
+    //     type: 'PUT',
+    //     url: '/list',
+    //     data: sendTask,
+    //     success: function (data) {
+    //       var task = data;
+    //       console.log('confirm status success');
+    //       // nested get call that retrieves the most current version of the list table
+    //       ajaxGet();
+    //     } // end POST success
+    //   }); // end ajax POST route
+    // }); // end create on click
+  });
 
 $('body').on('click', '.completeButton', function () {
     console.log('in confirm on click');
@@ -159,11 +164,8 @@ $('body').on('click', '.completeButton', function () {
         data: sendTask,
         success: function (data) {
           var task = data;
-          console.log('confirm status success');
-
-          // nested get call that retrieves the most current version of the list table
           ajaxGet();
-        }, // end POST success
+        } // end POST success
       }); // end ajax POST route
     }); // end create on click
 
